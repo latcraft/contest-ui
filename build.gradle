@@ -1,0 +1,40 @@
+
+plugins {
+  id "io.ratpack.ratpack-groovy" version "0.9.11"
+  id "idea"
+  id "eclipse"
+}
+
+idea {
+  project {
+    jdkName "1.8"
+    languageLevel "1.8"
+    ipr {
+      withXml { provider ->
+        def node = provider.asNode()
+        // Configure git support for the project in idea
+        node.component.find { it.'@name' == 'VcsDirectoryMappings' }?.mapping[0].'@vcs' = 'Git'
+      }
+    }
+  }
+}
+
+repositories {
+  jcenter()
+  maven { url "http://oss.jfrog.org/artifactory/repo" }
+  maven { url "http://dl.bintray.com/kdabir/maven" }
+}
+
+configurations.all {
+  exclude module: "groovy"
+}
+
+dependencies {
+  springloaded "org.springframework:springloaded:1.2.1.RELEASE"
+  compile "io.github.kdabir.gstorm:gstorm:0.7"
+  compile "io.ratpack:ratpack-jackson:0.9.11"
+  runtime "org.hsqldb:hsqldb:2.3.2" 
+  runtime "org.slf4j:slf4j-simple:1.7.7"
+  testCompile "junit:junit:4.12"
+}
+

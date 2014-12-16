@@ -1,0 +1,32 @@
+<div class="row">
+  <form class="form-inline" role="form" name="filterForm">
+    <div class="form-group">
+      <label for="filter">Filter:</label>
+      <input type="text" id="filter" ng-model="resultCtrl.filter" required class="form-control"/>
+    </div>
+  </form>
+</div>
+<div class="row">
+  <div class="col-sm-6">
+    <h2>Last</h2>
+    <table class="table table-striped table-bordered table-hover">
+      <tr ng-repeat="result in filteredLastResults = (resultCtrl.lastResults | filter:resultCtrl.filter)">
+        <td>{{result.userName}} @ {{result.solutionHostName}} done in {{result.duration}}ms started at {{result.startTime}} (error: {{result.exception}}, response: {{result.response}}, validation: {{result.validation}})</td>
+      </tr>
+      <tr ng-hide="filteredLastResults.length">
+        <td>No results</td>
+      </tr>
+    </table>
+  </div>
+  <div class="col-sm-6">
+    <h2>Top</h2>
+    <table class="table table-striped table-bordered table-hover">
+      <tr ng-repeat="result in filteredTopResults = (resultCtrl.topResults | filter:resultCtrl.filter)">
+        <td>{{result.userName}} @ {{result.solutionHostName}} done in {{result.duration}}ms started at {{result.startTime}} (error: {{result.exception}}, response: {{result.response}}, validation: {{result.validation}})</td>
+      </tr>
+      <tr ng-hide="filteredTopResults.length">
+        <td>No results</td>
+      </tr>
+    </table>
+  </div>
+</div>
