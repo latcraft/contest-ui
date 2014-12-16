@@ -15,6 +15,7 @@ class TaskRequestProcessor {
   void onRequest(TaskRequest request) {
     String response = null
     String validationMessage = null
+    def json = null
     Throwable exception = null
     long stopTime
     long startTime = System.currentTimeMillis()
@@ -26,7 +27,9 @@ class TaskRequestProcessor {
       stopTime = System.currentTimeMillis()
     }
     try {
-      def json = new JsonSlurper().parseText(response)
+      logger.debug("Request response: {}", response)
+      json = new JsonSlurper().parseText(response)
+      logger.debug("Request JSON: {}", json)
       // TODO: Validate response data
     } catch (Throwable t) {
       validationMessage = "${t.getClass().name}: ${t.message}"
@@ -40,7 +43,7 @@ class TaskRequestProcessor {
       validation: validationMessage,
       response: response
     )
-    logger.debug("Task result: %1", result)
+    logger.debug("Task result: {}", result)
     results.add(result)
   }
 

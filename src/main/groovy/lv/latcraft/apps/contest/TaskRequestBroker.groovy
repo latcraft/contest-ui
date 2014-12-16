@@ -21,7 +21,7 @@ class TaskRequestBroker {
         if (queue && processor) {
           TaskRequest request = queue.get()
           if (request) {
-            logger.info('Processing request: %s', request)
+            logger.info('Processing request: {}', request)
             try {
               processor.onRequest(request)
             } catch (Throwable t) {
