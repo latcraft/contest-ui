@@ -12,8 +12,8 @@ class TaskRequestProcessor {
   @Inject
   Logger logger
 
-  private static String VALID_RESPONSE = '["Practical Vim", "The Linux Command Line", "Mac OS X Snow Leopard"]'
-  private static VALID_RESPONSE_JSON = new JsonSlurper().parseText(VALID_RESPONSE)
+  public static String VALID_RESPONSE = '["Practical Vim", "The Linux Command Line", "Mac OS X Snow Leopard"]'
+  public static VALID_RESPONSE_JSON = new JsonSlurper().parseText(VALID_RESPONSE)
 
   void onRequest(TaskRequest request) {
     String response = null
@@ -31,25 +31,29 @@ class TaskRequestProcessor {
     }
     if (response) {
       try {
-        logger.debug("Request response: {}", response)
+        logger.info("Request response: {}", response)
         json = new JsonSlurper().parseText(response)
-        logger.debug("Request JSON: {}", json)
+        logger.info("Request JSON: {}", json)
         assert json == VALID_RESPONSE_JSON
       } catch (Throwable t) {
         validationMessage = "${t.getClass().name}: ${t.message}"
       }
     }
     TaskResult result = new TaskResult(
-      solutionHostName: request.solutionHostName,
-      userName: request.userName,
+      solutionHostName: truncate(request.solutionHostName),
+      userName: truncate(request.userName),
       startTime: startTime,
       duration: stopTime ? stopTime - startTime : -1,
-      exception: exception ? "${exception.getClass().name}: ${exception.message}" : null,
-      validation: validationMessage,
-      response: response
+      exception: exception ? truncate("${exception.getClass().name}: ${exception.message}") : null,
+      validation: truncate(validationMessage),
+      response: truncate(response)
     )
     logger.debug("Task result: {}", result)
     results.add(result)
+  }
+
+  String truncate(String input, int length = 255) {
+    input ? input.trim().substring(0, Math.min(input.length(), length)) : null
   }
 
 }

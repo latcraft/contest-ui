@@ -10,6 +10,7 @@ import static ratpack.groovy.Groovy.ratpack
 import static ratpack.jackson.Jackson.json
 import static ratpack.jackson.Jackson.jsonNode
 import static ratpack.registry.Registries.just
+import static lv.latcraft.apps.contest.TaskRequestProcessor.*
 
 ratpack {
 
@@ -21,6 +22,9 @@ ratpack {
   handlers { TaskRequestQueue queue, TaskResultDAO results, Logger logger ->
     get {
       render file("public/index.html")
+    }
+    get('solution') {
+      render json(VALID_RESPONSE_JSON)
     }
     prefix('api/v1') {
       handler {
