@@ -30,7 +30,6 @@ configurations.all {
 }
 
 dependencies {
-  springloaded "org.springframework:springloaded:1.2.1.RELEASE"
   compile "io.github.kdabir.gstorm:gstorm:0.7"
   compile "io.ratpack:ratpack-jackson:0.9.11"
   runtime "org.hsqldb:hsqldb:2.3.2" 
