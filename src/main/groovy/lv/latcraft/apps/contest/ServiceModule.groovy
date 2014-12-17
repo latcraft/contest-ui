@@ -12,7 +12,7 @@ class ServiceModule extends AbstractModule {
   @Override
   protected void configure() {
     Gstorm gstorm = new Gstorm(
-      Sql.newInstance("jdbc:hsqldb:file:/db/tasks", "sa", "", "org.hsqldb.jdbcDriver")
+      Sql.newInstance("jdbc:hsqldb:file:./db/tasks", "sa", "", "org.hsqldb.jdbcDriver")
     )
     gstorm.stormify(TaskResult)
     bind(Gstorm).toInstance(gstorm)
