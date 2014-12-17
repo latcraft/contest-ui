@@ -12,6 +12,9 @@ class TaskRequestProcessor {
   @Inject
   Logger logger
 
+  private static String VALID_RESPONSE = '["Practical Vim", "The Linux Command Line", "Mac OS X Snow Leopard"]'
+  private static VALID_RESPONSE_JSON = new JsonSlurper().parseText(VALID_RESPONSE)
+
   void onRequest(TaskRequest request) {
     String response = null
     String validationMessage = null
@@ -26,13 +29,15 @@ class TaskRequestProcessor {
     } finally {
       stopTime = System.currentTimeMillis()
     }
-    try {
-      logger.debug("Request response: {}", response)
-      json = new JsonSlurper().parseText(response)
-      logger.debug("Request JSON: {}", json)
-      // TODO: Validate response data
-    } catch (Throwable t) {
-      validationMessage = "${t.getClass().name}: ${t.message}"
+    if (response) {
+      try {
+        logger.debug("Request response: {}", response)
+        json = new JsonSlurper().parseText(response)
+        logger.debug("Request JSON: {}", json)
+        assert json == VALID_RESPONSE_JSON
+      } catch (Throwable t) {
+        validationMessage = "${t.getClass().name}: ${t.message}"
+      }
     }
     TaskResult result = new TaskResult(
       solutionHostName: request.solutionHostName,

@@ -14,4 +14,5 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_EMPTY
 class TaskRequest {
   String userName
   String solutionHostName
+  boolean processing = false
 }

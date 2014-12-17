@@ -34,7 +34,7 @@ ratpack {
         render json(results: results.top, response: 'OK')
       }
       get('result/last') {
-        render json(results: results.all, response: 'OK')
+        render json(results: results.last, response: 'OK')
       }
       handler {
         next(just(JsonNode, parse(jsonNode())))

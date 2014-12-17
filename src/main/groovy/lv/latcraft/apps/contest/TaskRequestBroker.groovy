@@ -19,13 +19,17 @@ class TaskRequestBroker {
     Thread.start {
       while (true) {
         if (queue && processor) {
-          TaskRequest request = queue.get()
+          TaskRequest request = queue.head()
           if (request) {
+            request.processing = true
             logger.info('Processing request: {}', request)
             try {
               processor.onRequest(request)
+              logger.info('Request done: {}', request)
             } catch (Throwable t) {
               logger.error("Problem with request processing!", t)
+            } finally {
+              queue.get()
             }
           }
         }
