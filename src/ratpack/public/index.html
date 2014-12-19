@@ -21,12 +21,12 @@
     <div id="wrapper">
 
       <!-- Sidebar -->
-      <div id="sidebar-wrapper">
+      <div id="sidebar-wrapper" ng-controller="PageController">
         <ul class="sidebar-nav">
           <li class="sidebar-brand"><a href="#/rules"><img src="images/logo.png"></a></li>
-          <li><a href="#/rules">Rules</a></li>
-          <li><a href="#/queue">Submit test request</a></li>
-          <li><a href="#/results">Test results</a></li>
+          <li><a href="#/rules" ng-class="{ selected: isActive('/rules') }">Rules</a></li>
+          <li><a href="#/queue" ng-class="{ selected: isActive('/queue') }">Submit test request</a></li>
+          <li><a href="#/results" ng-class="{ selected: isActive('/results') }">Test results</a></li>
         </ul>
       </div>
       <!-- /#sidebar-wrapper -->
@@ -55,6 +55,7 @@
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js"></script>
     <script type="text/javascript" src="filters.js"></script>
     <script type="text/javascript" src="app.js"></script>
+    <script type="text/javascript" src="tabs.js"></script>
     <script type="text/javascript" src="views/rules/rules.js"></script>
     <script type="text/javascript" src="views/queue/queue.js"></script>
     <script type="text/javascript" src="views/results/results.js"></script>

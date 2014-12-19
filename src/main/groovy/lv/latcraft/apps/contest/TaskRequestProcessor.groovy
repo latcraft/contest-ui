@@ -23,7 +23,7 @@ class TaskRequestProcessor {
     long stopTime
     long startTime = System.currentTimeMillis()
     try {
-      response = new URL("http://${request.solutionHostName}?q=Linux+Ubuntu+MacOs").text
+      response = new URL("http://${request.solutionHostName}?query=Linux+Ubuntu+MacOs").text
     } catch (Throwable t) {
       exception = t
     } finally {
