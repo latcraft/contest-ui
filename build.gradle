@@ -5,6 +5,9 @@ plugins {
   id "eclipse"
 }
 
+version = '0.1'
+group = 'lv.latcraft.contest'
+
 idea {
   project {
     jdkName "1.8"

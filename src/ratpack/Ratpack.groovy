@@ -23,7 +23,7 @@ ratpack {
     get {
       render file("public/index.html")
     }
-    get('solution') {
+    get('search') {
       render json(VALID_RESPONSE_JSON)
     }
     prefix('api/v1') {
