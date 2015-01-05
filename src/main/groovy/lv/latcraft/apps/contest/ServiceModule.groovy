@@ -11,10 +11,10 @@ class ServiceModule extends AbstractModule {
 
   @Override
   protected void configure() {
-    Gstorm gstorm = new Gstorm(
-      Sql.newInstance("jdbc:hsqldb:file:./db/tasks", "sa", "", "org.hsqldb.jdbcDriver")
-    )
+    Sql sql = Sql.newInstance("jdbc:hsqldb:file:./db/tasks", "sa", "", "org.hsqldb.jdbcDriver")
+    Gstorm gstorm = new Gstorm(sql)
     gstorm.stormify(TaskResult)
+    bind(Sql).toInstance(sql)
     bind(Gstorm).toInstance(gstorm)
     bind(Logger).toInstance(LoggerFactory.getLogger("lv.latcraft.contest"))
     bind(TaskResultDAO).in(Scopes.SINGLETON)

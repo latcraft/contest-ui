@@ -1,11 +1,15 @@
 import com.fasterxml.jackson.databind.JsonNode
+import groovy.sql.Sql
 import lv.latcraft.apps.contest.TaskRequest
 import lv.latcraft.apps.contest.TaskRequestQueue
 import lv.latcraft.apps.contest.ServiceModule
 import lv.latcraft.apps.contest.TaskResultDAO
 import org.slf4j.Logger
+import ratpack.form.Form
+import ratpack.groovy.templating.TemplatingModule
 import ratpack.jackson.JacksonModule
 
+import static ratpack.groovy.Groovy.groovyTemplate
 import static ratpack.groovy.Groovy.ratpack
 import static ratpack.jackson.Jackson.json
 import static ratpack.jackson.Jackson.jsonNode
@@ -17,9 +21,10 @@ ratpack {
   bindings {
     add new JacksonModule()
     add new ServiceModule()
+    add(TemplatingModule) { TemplatingModule.Config config -> config.staticallyCompile = true }
   }
 
-  handlers { TaskRequestQueue queue, TaskResultDAO results, Logger logger ->
+  handlers { Sql sql, TaskRequestQueue queue, TaskResultDAO results, Logger logger ->
     get {
       render file("public/index.html")
     }
@@ -51,6 +56,31 @@ ratpack {
         render json(response: 'OK')
       }
     }
+    handler("admin") {
+      byMethod {
+        get {
+          render groovyTemplate('admin.html', result: "")
+        }
+        post {
+          def result
+          Form form = parse(Form)
+          String query = form?.query?.toString()
+          logger.info("Executing '${query}'")
+          try {
+            if (query.toLowerCase().contains('select')) {
+              result = sql.rows(query)
+            } else {
+              result = sql.execute(query)
+            }
+          } catch (Throwable t) {
+            result = t
+          }
+          render groovyTemplate('admin.html', result: result)
+        }
+      }
+    }
+
+
     assets "public"
   }
 

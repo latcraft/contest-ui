@@ -1,0 +1,14 @@
+<html>
+<head>
+  <title>LatCraft Contest Application</title>
+  <link type="image/png" href="/images/favicon.png" rel="icon" sizes="16x16" >
+</head>
+<body>
+<form action="/admin" method="post">
+  <label for="query">Query:</label><br/><br/>
+  <textarea name="query" id="query" placeholder="Enter SQL query to execute!" cols="50" rows="5"></textarea><br/><br/>
+  <button type="submit">Submit</button>
+</form>
+<%= model?.result ?: "" %>
+</body>
+</html>
