@@ -1,24 +1,28 @@
 <article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h1>
+  <a id="user-content-w00t" class="anchor" href="#w00t" aria-hidden="true"><span class="octicon octicon-link"></span></a>W00t?</h1>
 
-  <h1>
-    <a id="user-content-problem-definition" class="anchor" href="#problem-definition" aria-hidden="true"><span class="octicon octicon-link"></span></a>Problem definition</h1>
+<p>This repository contains description of the first Cloudopoly challenge. Cloudopoly is a set of challenges targeted towards raising awareness of AWS stack. Winners will get prizes from AWS! The first Cloudopoly will have 3 challenges, one per month. By getting 3 times in top 3 you will win a special prize from LatCraft.</p>
 
-  <p>Publish a simple web service that accepts 3 keywords as a search criteria. </p>
+<h1>
+  <a id="user-content-problem-definition" class="anchor" href="#problem-definition" aria-hidden="true"><span class="octicon octicon-link"></span></a>Problem definition</h1>
 
-  <p>Web service must respond with the most popular book (with the highest average rating) for each keyword on the following Amazon websites:</p>
+<p>Publish a simple web service that accepts 3 keywords as a search criteria. </p>
 
-  <ul class="task-list">
-    <li>amazon.co.uk</li>
-    <li>amazon.fr</li>
-    <li>amazon.de</li>
-  </ul>
+<p>Web service must respond with the most popular book (with the highest average rating) for each keyword on the following Amazon websites:</p>
 
-  <p>Expected input: </p>
+<ul class="task-list">
+  <li>amazon.co.uk</li>
+  <li>amazon.fr</li>
+  <li>amazon.de</li>
+</ul>
+
+<p>Expected input: </p>
 
 <pre><code>http://&lt;ip address&gt;/search?query=Linux+Ubuntu+MacOs
 </code></pre>
 
-  <p>Expected JSON response:</p>
+<p>Expected JSON response:</p>
 
 <pre><code>[
   "Practical Vim",
@@ -27,79 +31,81 @@
   ]
 </code></pre>
 
-  <h1>
-    <a id="user-content-average-book-rating-calculation" class="anchor" href="#average-book-rating-calculation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Average book rating calculation</h1>
+<h1>
+  <a id="user-content-average-book-rating-calculation" class="anchor" href="#average-book-rating-calculation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Average book rating calculation</h1>
 
-  <p>Book rating should be calculated using the following formula:</p>
+<p>Book rating should be calculated using the following formula:</p>
 
-  <p>R = (R<sub>afr</sub> * N<sub>afr</sub> + R<sub>ade</sub> * N<sub>ade</sub> + R<sub>auk</sub> * N<sub>auk</sub>) / (N<sub>afr</sub> + N<sub>ade</sub> + N<sub>auk</sub>)</p>
+<p>R = (R<sub>afr</sub> * N<sub>afr</sub> + R<sub>ade</sub> * N<sub>ade</sub> + R<sub>auk</sub> * N<sub>auk</sub>) / (N<sub>afr</sub> + N<sub>ade</sub> + N<sub>auk</sub>)</p>
 
-  <ul class="task-list">
-    <li>R<sub>afr</sub> - average rating on amazon.fr</li>
-    <li>N<sub>afr</sub> - number of ratings on amazon.fr</li>
-    <li>R<sub>ade</sub> - average rating on amazon.de</li>
-    <li>N<sub>ade</sub>  - number of ratings on amazon.de</li>
-    <li>R<sub>auk</sub> - average rating on amazon.co.uk</li>
-    <li>N<sub>auk</sub> - number of ratings on amazon.co.uk</li>
-  </ul>
+<ul class="task-list">
+  <li>R<sub>afr</sub> - average rating on amazon.fr</li>
+  <li>N<sub>afr</sub> - number of ratings on amazon.fr</li>
+  <li>R<sub>ade</sub> - average rating on amazon.de</li>
+  <li>N<sub>ade</sub>  - number of ratings on amazon.de</li>
+  <li>R<sub>auk</sub> - average rating on amazon.co.uk</li>
+  <li>N<sub>auk</sub> - number of ratings on amazon.co.uk</li>
+</ul>
 
-  <p>NOTE: Only books with <strong>at least 15 reviews</strong> should be considered for result.</p>
+<p>NOTE: Only books with <strong>at least 15 reviews</strong> should be considered for result.</p>
 
-  <h1>
-    <a id="user-content-example-searches" class="anchor" href="#example-searches" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example searches</h1>
+<p>NOTE: For book title matching on different web sites, consider the following rule: remove everything that is after colon or semicolon (if any), and anything that is in the brackets (if any). If titles have the same rating, then return the one with the biggest number of reviews. If titles have the same rating and the same number in reviews, then return the one that goes first in alphabetical order. </p>
 
-  <p>The following list shows example URLs that return book query results for a given KEYWORD on the web:</p>
+<h1>
+  <a id="user-content-example-searches" class="anchor" href="#example-searches" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example searches</h1>
 
-  <ul class="task-list">
-    <li>
-      <a href="http://www.amazon.co.uk/s/ref=nb_sb_noss_1?url=search-alias%3Dstripbooks&amp;field-keywords=%3CKEYWORD%3E&amp;sort=review-rank">amazon.co.uk</a>:
+<p>The following list shows example URLs that return book query results for a given KEYWORD on the web:</p>
 
-      <ul class="task-list">
-        <li><code>http://www.amazon.co.uk/s/ref=nb_sb_noss_1?</code></li>
-        <li><code>url=search-alias%3Dstripbooks&amp;</code></li>
-        <li><code>field-keywords=[KEYWORD]&amp;</code></li>
-        <li><code>sort=review-rank</code></li>
-      </ul>
-    </li>
-    <li>
-      <a href="http://www.amazon.de/s/ref=nb_sb_noss_2?url=search-alias%3Dstripbooks&amp;field-keywords=%3CKEYWORD%3E&amp;sort=review-rank">amazon.de</a>:
+<ul class="task-list">
+  <li>
+    <a href="http://www.amazon.co.uk/s/ref=nb_sb_noss_1?url=search-alias%3Dstripbooks&amp;field-keywords=%3CKEYWORD%3E&amp;sort=review-rank">amazon.co.uk</a>:
 
-      <ul class="task-list">
-        <li><code>http://www.amazon.de/s/ref=nb_sb_noss_2?</code></li>
-        <li><code>url=search-alias%3Dstripbooks&amp;</code></li>
-        <li><code>field-keywords=[KEYWORD]&amp;</code></li>
-        <li><code>sort=review-rank</code></li>
-      </ul>
-    </li>
-    <li>
-      <a href="http://www.amazon.fr/s/ref=nb_sb_noss_2?url=search-alias%3Denglish-books&amp;field-keywords=%3CKEYWORD%3E&amp;sort=review-rank">amazon.fr</a>:
+    <ul class="task-list">
+      <li><code>http://www.amazon.co.uk/s/ref=nb_sb_noss_1?</code></li>
+      <li><code>url=search-alias%3Dstripbooks&amp;</code></li>
+      <li><code>field-keywords=[KEYWORD]&amp;</code></li>
+      <li><code>sort=review-rank</code></li>
+    </ul>
+  </li>
+  <li>
+    <a href="http://www.amazon.de/s/ref=nb_sb_noss_2?url=search-alias%3Dstripbooks&amp;field-keywords=%3CKEYWORD%3E&amp;sort=review-rank">amazon.de</a>:
 
-      <ul class="task-list">
-        <li><code>http://www.amazon.fr/s/ref=nb_sb_noss_2?</code></li>
-        <li><code>url=search-alias%3Denglish-books&amp;</code></li>
-        <li><code>field-keywords=[KEYWORD]&amp;</code></li>
-        <li><code>sort=review-rank</code></li>
-      </ul>
-    </li>
-  </ul>
+    <ul class="task-list">
+      <li><code>http://www.amazon.de/s/ref=nb_sb_noss_2?</code></li>
+      <li><code>url=search-alias%3Dstripbooks&amp;</code></li>
+      <li><code>field-keywords=[KEYWORD]&amp;</code></li>
+      <li><code>sort=review-rank</code></li>
+    </ul>
+  </li>
+  <li>
+    <a href="http://www.amazon.fr/s/ref=nb_sb_noss_2?url=search-alias%3Denglish-books&amp;field-keywords=%3CKEYWORD%3E&amp;sort=review-rank">amazon.fr</a>:
 
-  <h1>
-    <a id="user-content-requirements" class="anchor" href="#requirements" aria-hidden="true"><span class="octicon octicon-link"></span></a>Requirements</h1>
+    <ul class="task-list">
+      <li><code>http://www.amazon.fr/s/ref=nb_sb_noss_2?</code></li>
+      <li><code>url=search-alias%3Denglish-books&amp;</code></li>
+      <li><code>field-keywords=[KEYWORD]&amp;</code></li>
+      <li><code>sort=review-rank</code></li>
+    </ul>
+  </li>
+</ul>
 
-  <ul class="task-list">
-    <li>Any programming language, any operating system</li>
-    <li>Deploy your service to <em>AWS</em> <em>EC2</em> (free tier)</li>
-    <li>Use smallest instance type (<code>t2.micro</code>)</li>
-    <li>Send IP address of your service before <code>06.01.2015 16:00</code> to <a href="mailto:contest@latcraft.lv">contest@latcraft.lv</a>
-    </li>
-    <li>At <code>17:00</code> we start the test! </li>
-  </ul>
+<h1>
+  <a id="user-content-requirements" class="anchor" href="#requirements" aria-hidden="true"><span class="octicon octicon-link"></span></a>Requirements</h1>
 
-  <h1>
-    <a id="user-content-winner-election" class="anchor" href="#winner-election" aria-hidden="true"><span class="octicon octicon-link"></span></a>Winner election</h1>
+<ul class="task-list">
+  <li>Any programming language, any operating system</li>
+  <li>Deploy your service to <em>AWS</em> <em>EC2</em> (free tier)</li>
+  <li>Use smallest instance type (<code>t2.micro</code>)</li>
+  <li>Send IP address of your service before <code>06.01.2015 16:00</code> to <a href="mailto:contest@latcraft.lv">contest@latcraft.lv</a>
+  </li>
+  <li>At <code>17:00</code> we start the test! </li>
+</ul>
 
-  <p>Web services, which return the expected result faster, will win. Test data set consists of 3 queries, each query contains 3 keywords. Each query will be sent 3 times to the web service published at your IP address.</p>
+<h1>
+  <a id="user-content-winner-election" class="anchor" href="#winner-election" aria-hidden="true"><span class="octicon octicon-link"></span></a>Winner election</h1>
 
-  <h3>
-    <a id="user-content-good-luck" class="anchor" href="#good-luck" aria-hidden="true"><span class="octicon octicon-link"></span></a>Good luck!</h3>
+<p>Web services, which return the expected result faster, will win. Test data set consists of 3 queries, each query contains 3 keywords. Each query will be sent 3 times to the web service published at your IP address.</p>
+
+<h3>
+  <a id="user-content-good-luck" class="anchor" href="#good-luck" aria-hidden="true"><span class="octicon octicon-link"></span></a>Good luck!</h3>
 </article>
