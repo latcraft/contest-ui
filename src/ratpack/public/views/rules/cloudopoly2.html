@@ -1,0 +1,57 @@
+<h1><strong>Cloudopoly #2</strong></h1>
+<article class="markdown-body entry-content" itemprop="mainContentOfPage"><h1>
+  <a id="user-content-w00t-" class="anchor" href="#w00t-" aria-hidden="true"><span class="octicon octicon-link"></span></a>W00t? </h1>
+
+  <p>This repository contains description of the second Cloudopoly challenge. Cloudopoly is a set of challenges targeted towards raising awareness of AWS stack. Winners will get prizes from AWS! The first Cloudopoly will have 3 challenges, one per month. By getting 3 times in top 3 you will win a special prize from LatCraft.</p>
+
+  <p>Information about the first challenge can be found <a href="https://github.com/latcraft/cloudopoly-search">here</a>.</p>
+
+  <h1>
+    <a id="user-content-problem-definition" class="anchor" href="#problem-definition" aria-hidden="true"><span class="octicon octicon-link"></span></a>Problem definition</h1>
+
+  <p>Create an image processing service which:</p>
+
+  <ul class="task-list">
+    <li>Accepts a set of bit.ly identifiers that point to JPG images with 2048 x 1365 resolution.</li>
+    <li>Resolves URIs (<code>1uCqioJ</code> resolves to <code>http://bit.ly/1uCqioJ</code>) and uploads images to your S3 bucket. Before uploading, <a href="/latcraft/cloudopoly-pics/blob/master/logo.png">LatCraft logo</a> should be added to the top-right corner of every image (feel free to convert logo to more convenient format if neccessary).</li>
+    <li>Concatenates 10 logo-marked images (in any order) by forming large 2048 x 13650 image.</li>
+    <li>Uploads concatenated image to your S3 instance.</li>
+    <li>Responds with links to 11 uploaded images.</li>
+  </ul>
+
+  <p>Expected input: </p>
+
+<pre><code>    http://&lt;ip address&gt;/process?images=1uCqioJ+1sqlimo+1uADAkJ+1BHryP2+13koVon+1uCqTGX+16jnrfk+1wsy1sC+1wN7idN+1uADWb8
+</code></pre>
+
+  <p>Expected JSON response:</p>
+
+<pre><code>[
+  "http://&lt;s3 bucket address&gt;&gt;/1uCqioJ.jpg",
+  "http://&lt;s3 bucket address&gt;&gt;/1sqlimo.jpg",
+  ... 7 more links here
+  "http://&lt;s3 bucket address&gt;&gt;/1uADWb8.jpg",
+  "http://&lt;s3 bucket address&gt;&gt;/concatenated.jpg"
+  ]
+</code></pre>
+
+  <h1>
+    <a id="user-content-requirements" class="anchor" href="#requirements" aria-hidden="true"><span class="octicon octicon-link"></span></a>Requirements</h1>
+
+  <ul class="task-list">
+    <li>Any programming language, any operating system</li>
+    <li>Deploy your service to <em>AWS</em> <em>EC2</em> (free tier)</li>
+    <li>Use smallest instance type (<code>t2.micro</code>)</li>
+    <li>Send IP address of your service before <code>02.02.2015 18:00</code> to <a href="mailto:contest@latcraft.lv">contest@latcraft.lv</a>
+    </li>
+    <li>On <code>02.02.2015 20:00</code> we start the test! </li>
+  </ul>
+
+  <h1>
+    <a id="user-content-winner-election" class="anchor" href="#winner-election" aria-hidden="true"><span class="octicon octicon-link"></span></a>Winner election</h1>
+
+  <p>Web services, which return the expected result faster, will win.</p>
+
+  <h3>
+    <a id="user-content-good-luck" class="anchor" href="#good-luck" aria-hidden="true"><span class="octicon octicon-link"></span></a>Good luck!</h3>
+</article>

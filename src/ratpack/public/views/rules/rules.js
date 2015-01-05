@@ -5,7 +5,13 @@ angular
   .config(['$routeProvider', function($routeProvider) {
 
     $routeProvider.when('/rules', {
-      templateUrl: 'views/rules/rules.html',
+      templateUrl: 'views/rules/cloudopoly1.html',
+      controller: 'ResultController'
+    }).when('/cloudopoly1', {
+      templateUrl: 'views/rules/cloudopoly1.html',
+      controller: 'ResultController'
+    }).when('/cloudopoly2', {
+      templateUrl: 'views/rules/cloudopoly2.html',
       controller: 'ResultController'
     });
 
