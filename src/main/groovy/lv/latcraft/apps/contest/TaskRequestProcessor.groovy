@@ -12,7 +12,7 @@ class TaskRequestProcessor {
   @Inject
   Logger logger
 
-  public static String VALID_RESPONSE = '["Practical Vim", "The Linux Command Line", "Mac OS X Snow Leopard"]'
+  public static String VALID_RESPONSE = '["Practical Vim", "Linux", "Mac OS X Snow Leopard"]'
   public static VALID_RESPONSE_JSON = new JsonSlurper().parseText(VALID_RESPONSE)
 
   void onRequest(TaskRequest request) {
