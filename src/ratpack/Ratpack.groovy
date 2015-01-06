@@ -72,6 +72,7 @@ ratpack {
             } else {
               result = sql.execute(query)
             }
+            sql.commit()
           } catch (Throwable t) {
             result = t
           }
