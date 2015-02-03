@@ -28,34 +28,35 @@ ratpack {
     get {
       render file("public/index.html")
     }
-    get('search') {
-      render json(VALID_RESPONSE_JSON)
-    }
-    prefix('api/v1') {
-      handler {
-        logger.info "${request.method} ${request.path}"
-        next()
-      }
-      get('queue/all') {
-        render json(requests: queue.all, response: 'OK')
-      }
-      get('result/top') {
-        render json(results: results.top, response: 'OK')
-      }
-      get('result/last') {
-        render json(results: results.last, response: 'OK')
-      }
-      handler {
-        next(just(JsonNode, parse(jsonNode())))
-      }
-      post('queue/submit') { JsonNode jsonRequest ->
-        queue.push(new TaskRequest(
-          userName: jsonRequest.get('userName')?.asText(),
-          solutionHostName: jsonRequest.get('solutionHostName')?.asText()
-        ))
-        render json(response: 'OK')
-      }
-    }
+//  NOTE: Queue and testing API disabled for now.
+//    get('search') {
+//      render json(VALID_RESPONSE_JSON)
+//    }
+//    prefix('api/v1') {
+//      handler {
+//        logger.info "${request.method} ${request.path}"
+//        next()
+//      }
+//      get('queue/all') {
+//        render json(requests: queue.all, response: 'OK')
+//      }
+//      get('result/top') {
+//        render json(results: results.top, response: 'OK')
+//      }
+//      get('result/last') {
+//        render json(results: results.last, response: 'OK')
+//      }
+//      handler {
+//        next(just(JsonNode, parse(jsonNode())))
+//      }
+//      post('queue/submit') { JsonNode jsonRequest ->
+//        queue.push(new TaskRequest(
+//          userName: jsonRequest.get('userName')?.asText(),
+//          solutionHostName: jsonRequest.get('solutionHostName')?.asText()
+//        ))
+//        render json(response: 'OK')
+//      }
+//    }
     handler("admin") {
       byMethod {
         get {
