@@ -34,11 +34,13 @@ angular
       // TODO: implement loading through SSE/WebSocket
     };
 
-    this.loadResults();
+// NOTE: Disable loading since API is also disabled
+//    this.loadResults();
 
-    $interval(function() {
-      $scope.resultCtrl.loadResults();
-    }, 10000); // TODO: stop this when view changes
+// NOTE: Disable timer since API is also disabled
+//    $interval(function() {
+//      $scope.resultCtrl.loadResults();
+//    }, 10000); // TODO: stop this when view changes
 
     $scope.$on('loadResults', function(event, args) {
       $log.debug('Received data loading event!');

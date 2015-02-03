@@ -30,7 +30,8 @@ angular
       // TODO: implement loading through SSE/WebSocket
     };
 
-    this.loadQueue();
+// NOTE: Disable loading since API is also disabled
+//    this.loadQueue();
 
     this.submitRequest = function() {
       this.currentRequest = {};
@@ -52,9 +53,10 @@ angular
       });
     };
 
-    $interval(function() {
-      $scope.queueCtrl.loadQueue();
-    }, 5000); // TODO: stop this when view changes
+// NOTE: Disable timer since API is also disabled
+//    $interval(function() {
+//      $scope.queueCtrl.loadQueue();
+//    }, 5000); // TODO: stop this when view changes
 
   });
 
